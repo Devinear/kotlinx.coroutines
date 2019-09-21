@@ -1,14 +1,18 @@
+/*
+ * Copyright 2016-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
 package kotlinx.coroutines.channels
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.internal.*
 import kotlinx.coroutines.selects.*
-import kotlin.native.concurrent.SharedImmutable
+import kotlin.native.concurrent.*
 
 /**
  * Channel that buffers at most one element and conflates all subsequent `send` and `offer` invocations,
  * so that the receiver always gets the most recently sent element.
- * Back-to-send sent elements are _conflated_ -- only the the most recently sent element is received,
+ * Back-to-send sent elements are _conflated_ -- only the most recently sent element is received,
  * while previously sent elements **are lost**.
  * Sender to this channel never suspends and [offer] always returns `true`.
  *
